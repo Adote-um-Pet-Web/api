@@ -25,6 +25,9 @@ module Api
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    config.i18n.default_locale = :'pt-BR'
+    config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}')]
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
