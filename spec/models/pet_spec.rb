@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Pet, type: :model do
   subject { build(:pet) }
 
-  it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:owner).class_name('User').with_foreign_key('owner_id') }
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:species) }

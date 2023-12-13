@@ -20,6 +20,6 @@ FactoryBot.define do
     history { FFaker::Lorem.paragraph }
     observations { FFaker::Lorem.paragraph }
     adopted { [true, false].sample }
-    association :user
+    association :owner, factory: :user
   end
 end

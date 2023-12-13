@@ -13,7 +13,7 @@ class CreatePets < ActiveRecord::Migration[7.0]
       t.text :history
       t.text :observations
       t.boolean :adopted, default: false
-      t.references :user, null: false, foreign_key: true
+      t.references :owner, null: false, foreign_key: { to_table: :users }
 
       t.timestamps
     end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Pet < ApplicationRecord
-  belongs_to :user
+  belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
 
   validates :name, :species, :breed, :age, :age_type, :sex, :size, :weight, presence: true
   validates :age, :weight, numericality: { greater_than: 0 }
