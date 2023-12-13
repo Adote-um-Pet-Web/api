@@ -3,6 +3,9 @@
 class Pet < ApplicationRecord
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
 
+  has_one :adoption
+  has_one :adopter, through: :adoption, source: :adopter
+
   validates :name, :species, :breed, :age, :age_type, :sex, :size, :weight, presence: true
   validates :age, :weight, numericality: { greater_than: 0 }
 

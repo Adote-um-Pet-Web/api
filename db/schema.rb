@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_12_212903) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_13_124322) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adoptions", force: :cascade do |t|
+    t.bigint "owner_id", null: false
+    t.bigint "pet_id", null: false
+    t.bigint "adopter_id", null: false
+    t.datetime "date"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["adopter_id"], name: "index_adoptions_on_adopter_id"
+    t.index ["owner_id"], name: "index_adoptions_on_owner_id"
+    t.index ["pet_id"], name: "index_adoptions_on_pet_id"
+  end
 
   create_table "pets", force: :cascade do |t|
     t.string "name"
@@ -27,10 +40,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_212903) do
     t.text "history"
     t.text "observations"
     t.boolean "adopted", default: false
-    t.bigint "user_id", null: false
+    t.bigint "owner_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_pets_on_user_id"
+    t.index ["owner_id"], name: "index_pets_on_owner_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -57,5 +70,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_212903) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "pets", "users"
+  add_foreign_key "adoptions", "pets"
+  add_foreign_key "adoptions", "users", column: "adopter_id"
+  add_foreign_key "adoptions", "users", column: "owner_id"
+  add_foreign_key "pets", "users", column: "owner_id"
 end
