@@ -5,13 +5,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.0'
 
-gem 'pg', '~> 1.1'
-gem 'puma', '~> 5.0'
+gem 'pg', '~> 1.5', '>= 1.5.4'
+gem 'puma', '~> 6.4'
 gem 'rack-cors'
 gem 'rails', '~> 7.0.8'
 
 # Auth
 gem 'devise_token_auth', '~> 1.2', '>= 1.2.2'
+gem 'rolify', '~> 6.0', '>= 6.0.1'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
@@ -37,9 +38,9 @@ gem 'bootsnap', require: false
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.4', '>= 6.4.2'
+  gem 'ffaker', '~> 2.23'
   gem 'rspec-rails', '~> 6.1'
   gem 'shoulda-matchers', '~> 5.3'
-  gem 'ffaker', '~> 2.21'
 end
 
 group :development do

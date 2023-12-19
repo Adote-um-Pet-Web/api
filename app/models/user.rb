@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
+  after_create :assign_default_role
+
+  rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -11,4 +14,10 @@ class User < ActiveRecord::Base
 
   has_many :adoptions, foreign_key: 'adopter_id'
   has_many :adopted_pets, through: :adoptions, source: :pet
+
+  private
+
+  def assign_default_role
+    add_role(:user) if roles.blank?
+  end
 end
