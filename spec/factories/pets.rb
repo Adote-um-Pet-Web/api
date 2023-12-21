@@ -19,6 +19,12 @@ FactoryBot.define do
     weight { rand(1..40) }
     history { FFaker::Lorem.paragraph }
     observations { FFaker::Lorem.paragraph }
+    images do
+      [
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/support/images/pet_image.jpg')),
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/support/images/pet_image.jpg'))
+      ]
+    end
     adopted { [true, false].sample }
     association :owner, factory: :user
   end

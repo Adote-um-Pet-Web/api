@@ -8,6 +8,7 @@ RSpec.describe Pet, type: :model do
   it { is_expected.to belong_to(:owner).class_name('User').with_foreign_key('owner_id') }
   it { is_expected.to have_many(:adoptions) }
   it { is_expected.to have_many(:adopters).through(:adoptions).source(:adopter) }
+  it { is_expected.to have_many_attached(:images) }
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:species) }
@@ -19,6 +20,8 @@ RSpec.describe Pet, type: :model do
   it { is_expected.to validate_presence_of(:age) }
   it { is_expected.to validate_numericality_of(:age).is_greater_than(0) }
   it { is_expected.to validate_numericality_of(:weight).is_greater_than(0) }
+
+  it { is_expected.to validate_presence_of(:images) }
 
   it { is_expected.to define_enum_for(:species).with_values(dog: 0, cat: 1) }
   it { is_expected.to define_enum_for(:sex).with_values(male: 0, female: 1, undefined_sex: 2) }

@@ -6,7 +6,9 @@ class Pet < ApplicationRecord
   has_many :adoptions
   has_many :adopters, through: :adoptions, source: :adopter
 
-  validates :name, :species, :breed, :age, :age_type, :sex, :size, :weight, presence: true
+  has_many_attached :images
+
+  validates :name, :species, :breed, :age, :age_type, :sex, :size, :weight, :images, presence: true
   validates :age, :weight, numericality: { greater_than: 0 }
 
   enum species: { dog: 0, cat: 1 }
