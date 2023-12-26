@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   namespace :v1 do
     namespace :admin do
       get 'home' => 'home#index'
+      resources :users
     end
+    resources :pets
+    resources :adoptions
   end
 end

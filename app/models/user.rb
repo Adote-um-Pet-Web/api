@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :adoptions, foreign_key: 'adopter_id'
   has_many :adopted_pets, through: :adoptions, source: :pet
 
+  validates :name, :email, presence: true
+
   private
 
   def assign_default_role
