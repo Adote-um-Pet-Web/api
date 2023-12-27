@@ -18,14 +18,16 @@ module V1
 
       def update
         if @user.update(user_params)
-          render :show, status: :ok, location: @user
+          render :show, status: :ok, location: v1_admin_user_url(@user)
         else
-          render json: @user.errors, status: :unprocessable_entity
+          render json: { errors: @user.errors }, status: :unprocessable_entity
         end
       end
 
       def destroy
-        @user.destroy
+        @user.destroy!
+      rescue ActiveRecord::RecordNotDestroyed
+        render json: { errors: @user.errors }, status: :unprocessable_entity
       end
 
       private
