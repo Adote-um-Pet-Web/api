@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'pry'
 
-RSpec.describe 'V1::Admin::Users', type: :request do
-  let!(:auth_user) { create(:user) }
+RSpec.describe 'V1::Admin::Users as :admin', type: :request do
+  let!(:auth_user) do
+    auth_user = create(:user)
+    auth_user.add_role(:admin)
+    auth_user
+  end
 
   context 'GET /v1/admin/users' do
     let(:url) { '/v1/admin/users' }
