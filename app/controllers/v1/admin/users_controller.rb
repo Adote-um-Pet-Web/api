@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 module V1
   module Admin
-    class UsersController < ApiController
+    class UsersController < ApplicationController
       before_action :set_user, only: %i[show update destroy]
+      before_action :authorize_user
 
       def index
-        @users = User.all
+        @users = policy_scope(User)
       end
 
       def create
@@ -31,6 +34,10 @@ module V1
       end
 
       private
+
+      def authorize_user
+        authorize current_user
+      end
 
       def set_user
         @user = User.find(params[:id])
