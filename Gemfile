@@ -13,6 +13,7 @@ gem 'rails', '~> 7.0.8'
 
 # Auth
 gem 'devise_token_auth', '~> 1.2', '>= 1.2.2'
+gem 'pundit', '~> 2.3', '>= 2.3.1'
 gem 'rolify', '~> 6.0', '>= 6.0.1'
 
 # Use Redis adapter to run Action Cable in production
