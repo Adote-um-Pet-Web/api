@@ -9,6 +9,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+  include NameSearchable
 
   has_many :owned_pets, class_name: 'Pet', foreign_key: 'owner_id', dependent: :destroy
 
