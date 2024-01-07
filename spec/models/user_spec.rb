@@ -15,5 +15,5 @@ RSpec.describe User, type: :model do
   end
 
   it_behaves_like 'name searchable concern', :user
-  
+  it_behaves_like 'paginatable concern', :user
 end

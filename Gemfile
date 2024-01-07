@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.0'
 
 gem 'jbuilder', '~> 2.11', '>= 2.11.5'
+gem 'kaminari', '~> 1.2', '>= 1.2.2'
 gem 'pg', '~> 1.5', '>= 1.5.4'
 gem 'puma', '~> 6.4'
 gem 'rack-cors'

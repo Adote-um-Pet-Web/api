@@ -27,4 +27,6 @@ RSpec.describe Pet, type: :model do
   it { is_expected.to define_enum_for(:sex).with_values(male: 0, female: 1, undefined_sex: 2) }
   it { is_expected.to define_enum_for(:size).with_values(small: 0, medium: 1, large: 2, undefined_size: 3) }
   it { is_expected.to define_enum_for(:age_type).with_values(months: 0, years: 1) }
+
+  it_behaves_like 'paginatable concern', :pet
 end
