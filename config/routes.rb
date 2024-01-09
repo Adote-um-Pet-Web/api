@@ -8,7 +8,14 @@ Rails.application.routes.draw do
       get 'home' => 'home#index'
       resources :users
     end
-    resources :pets
+    resources :pets, only: %i[show create update destroy] do
+      collection do
+        get 'my_pets'
+        get 'my_pets/:id', to: 'pets#show_my_pet'
+        get 'availables'
+        get 'availables/:id', to: 'pets#show_available'
+      end
+    end
     resources :adoptions
   end
 end
