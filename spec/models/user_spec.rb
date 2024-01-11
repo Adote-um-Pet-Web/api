@@ -13,4 +13,7 @@ RSpec.describe User, type: :model do
       expect(user.has_role?(:user)).to be_truthy
     end
   end
+
+  it_behaves_like 'name searchable concern', :user
+  it_behaves_like 'paginatable concern', :user
 end

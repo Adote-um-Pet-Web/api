@@ -1,24 +1,76 @@
-# README
+# API - Adote um Pet Web - Plataforma de Adoção de Animais
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Este é um projeto Open Source da API de uma plataforma de adoção de animais.
 
-Things you may want to cover:
+O frontend pode ser encontrado em: [Web - Adote um Pet Web](https://github.com/Adote-um-Pet-Web/web)
 
-* Ruby version
+A plataforma foi projetada para facilitar o processo de adoção de animais, onde os usuários possam encontrar seu futuro pet de estimação de maneira simples e rápida, com todas as informações necessárias para realizar uma adoção consciente e responsável. 
 
-* System dependencies
+**Importante:** Este projeto está em andamento. 
 
-* Configuration
+## Stack
+- Ruby on Rails
+- PostgreSQL
+- Autenticação com Devise
+- Autorização com Pundit
+- Hospedagem AWS
 
-* Database creation
+## Como usar?
+O sistema possui endpoints específicos para diferentes tipos de usuários com permissões variadas.
 
-* Database initialization
+Existem perfis distintos na aplicação: administrador, usuário doador e usuário adotante.
 
-* How to run the test suite
+- O **usuário doador** é responsável por cadastrar, atualizar e remover animais para adoção.
+- O **usuário adotante** tem permissão para visualizar animais disponíveis e iniciar o processo de adoção.
 
-* Services (job queues, cache servers, search engines, etc.)
+Também existem rotas não autenticadas, como a listagem de animais disponíveis para adoção. Para o usuário adotante visualizar as informações de contato do doador do animal, é necessário está cadastrado na plataforma.
 
-* Deployment instructions
+## Configuração da Aplicação
+Para configurar o projeto, você precisa ter:
 
-* ...
+- PostgreSQL instalado.
+- Ruby >= 3.2.0 (mínimo requerido para o Rails 7).
+
+Não esqueça de configurar corretamente o seu `database.yml`.
+
+Para instalar as dependências, use o comando:
+  ```
+  bundle install
+  ```
+
+### Configurando o Ambiente de Desenvolvimento
+
+- Criar bancos de dados:
+  ```
+  rails db:create
+  ```
+- Rodar migrações:
+  ```
+  rails db:migrate
+  ```
+- Iniciar o servidor:
+  ```
+  rails s
+  ```
+
+Para rodar testes:
+```
+  rspec
+  ```
+
+## Como usar a API?
+- A documentação da API pode ser encontrada na pasta `doc`, incluindo arquivos para importação no Postman.
+
+## Escopos da API
+Existem escopos principais na API:
+
+- `v1/auth`: para autenticação
+- `v1/pets`: cadastrar pets disponíveis para adoção
+- `v1/adoptions`: para usuários adotantes realizar o processo de adoção.
+
+Cada escopo possui sua própria versão, por exemplo, `v1/pets`.
+
+## Autenticação
+A autenticação é realizada através do Devise. As requisições autenticadas precisam incluir cabeçalhos de autenticação, que são atualizados a cada requisição.
+
+
