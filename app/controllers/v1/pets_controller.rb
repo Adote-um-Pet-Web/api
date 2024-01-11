@@ -42,19 +42,22 @@ module V1
     # GET /pets/availables/:id
     def show_available
       # precisa ser usuário autenticado
-      @pet = Pet.find_by!(id: params[:id], adopted: false) # ajustar pelo status de adoção      
+      @pet = Pet.find_by!(id: params[:id], adopted: false) # ajustar pelo status de adoção
       render :show_available, status: :ok, location: v1_pets_url(@pets)
     end
 
     # POST /pets
     def create
       @pet = Pet.new(pet_params)
+      @pet.owner = current_user unless pet_params[:owner_id]
 
       if @pet.save
-        render json: @pet, status: :created, location: @pet
+        render json: @pet, status: :created, location: v1_pets_url(@pets)
       else
-        render json: @pet.errors, status: :unprocessable_entity
+        render json: { errors: @pet.errors }, status: :unprocessable_entity
       end
+    rescue ArgumentError => e
+      render json: { errors: e.message }, status: :unprocessable_entity
     end
 
     # PATCH/PUT /pets/1
@@ -80,8 +83,8 @@ module V1
 
     # Only allow a list of trusted parameters through.
     def pet_params
-      params.require(:pet).permit(:name, :species, :breed, :age, :color, :sex, :size, :weight, :history,
-                                  :observations, :adopted, :user_id)
+      params.require(:pet).permit(:name, :species, :breed, :age, :age_type, :color, :sex, :size, :weight, :history,
+                                  :observations, :adopted, :owner_id, images: [])
     end
   end
 end

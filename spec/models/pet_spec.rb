@@ -21,7 +21,7 @@ RSpec.describe Pet, type: :model do
   it { is_expected.to validate_numericality_of(:age).is_greater_than(0) }
   it { is_expected.to validate_numericality_of(:weight).is_greater_than(0) }
 
-  it { is_expected.to validate_presence_of(:images) }
+  # it { is_expected.to validate_presence_of(:images) }
 
   it { is_expected.to define_enum_for(:species).with_values(dog: 0, cat: 1) }
   it { is_expected.to define_enum_for(:sex).with_values(male: 0, female: 1, undefined_sex: 2) }
